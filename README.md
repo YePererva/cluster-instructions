@@ -77,8 +77,10 @@ I prefer a [Fedora Server](https://getfedora.org/en/server/download/) with [GNOM
 Computers:
 - Dell System PowerEdge R415 (as `Node 0` and `NAS`) \
   as a server with ability to turn off the integrated video and use discrete video card
-- HP ProLiant G5 and G7 (as `Nodes 1 ... X`) \
+- HP ProLiant G5 (DL165) and G7 (as `Nodes 1 ... X`) \
   as server without possibility to turn of the integrated video card and turn on the discrete (as of G5)
+- Generic 1 GBit Ethernet switch
+- 1 keyboard + 1 mouse + 1 monitor
 
 ## Tools
 - Needed:

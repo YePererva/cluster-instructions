@@ -62,7 +62,7 @@ This functionality can be implemented on `Managing node` (using `NFS` or `SAMBA`
   - do all work on computation
   - has an installed OS with Graphical Desktop Environment, but GDE is off by default start-up
   - have individual local drives with installed OS (no network boot!)
-- `Network Attached Storage` is a server with installed FreeNAS.
+- `Network Attached Storage` is a server with installed `FreeNAS`.
   - has small HDD / SSD to start-up from
   - a separate HDD(s) or SSD(s) to be used as shared storage
 - All computers are set-up to:
@@ -94,7 +94,6 @@ Computers:
     for editing disks / partitions sizes
   - external USB drive for storage and further re-deploying of distro images \
     **NB! :** Make sure that computers you have can provide enough power through the USB port for reliable work of external USB HDD.
-
 
 - Alternatively:
   - use an external HDD/SDD with emulation of ISO (such as [ZALMAN ZM-VE350](https://www.zalman.com/US/Product/ProductDetail.do?pageIndex=1&pageSize=10&pageUnit=12&productSeq=914&searchCategory1=86&searchCategory2=89&searchCategory3=-99&searchKey=&searchWord=) / [IODD-2531](http://iodd.kr/wordpress/product/iodd-2531/), etc.)  

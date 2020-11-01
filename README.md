@@ -76,7 +76,8 @@ I prefer a [Fedora Server](https://getfedora.org/en/server/download/) with [GNOM
 ## Cluster itself
 Computers:
 - Dell System PowerEdge R415 (as `Node 0` and `NAS`) \
-  as a server with ability to turn off the integrated video and use discrete video card
+  as a server with ability to turn off the integrated video and use discrete video card\
+  `Node 0` is also equipped with `NVIDIA GeForce GT 720` discrete video card
 - HP ProLiant G5 (DL165) and G7 (as `Nodes 1 ... X`) \
   as server without possibility to turn of the integrated video card and turn on the discrete (as of G5)
 - Generic 1 GBit Ethernet switch

@@ -13,6 +13,8 @@
   # installing R with dependencies
   sudo apt install dirmngr gnupg apt-transport-https ca-certificates software-properties-common build-essential -y
   sudo apt install r-base-dev
+  # Installing RUST
+  curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
   # Installing Haskell
   sudo apt-get install haskell-platform
   # Installing Julia
@@ -37,7 +39,6 @@
   pip install mpi4py h5py
   # media processing
   sudo apt install ffmpeg opus-tools
-  sudo add-apt-repository multiverse
   sudo apt install ubuntu-restricted-extras
   ```
 
@@ -45,12 +46,19 @@
 ```
 sudo apt install munge libmunge-dev slurm-wlm slurm-wlm-doc -y
 ```
-  and generate munge keys:
+and generate munge keys:
 ```
 sudo systemctl start munge
-sudo /usr/sbin/create-munge-key -r
+sudo /usr/sbin/mungekey
 ```
-and try id that worked:
+
+NB!: Before, the key file was created by `sudo /usr/sbin/create-munge-key -r`. Since [March](https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=693786) this was changed to command above.
+Alternatively, the Munge key file can be  created as :
+- `dd if=/dev/urandom bs=1 count=1024 > /etc/munge/munge.key`
+- `dd if=/dev/random bs=1 count=1024 > /etc/munge/munge.key`
+
+
+and try if that worked:
 ```
 munge -n | unmunge
 ```

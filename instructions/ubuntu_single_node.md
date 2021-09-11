@@ -50,6 +50,7 @@ and generate munge keys:
 ```
 sudo systemctl start munge
 sudo /usr/sbin/mungekey
+sudo chown munge /etc/munge/munge.key
 ```
 
 NB!: Before, the key file was created by `sudo /usr/sbin/create-munge-key -r`. Since [March](https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=693786) this was changed to command above.

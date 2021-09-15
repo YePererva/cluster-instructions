@@ -32,6 +32,8 @@
   sudo apt install gfortran
   # Installing Perl
   sudo apt install perl
+  # Installing COBOL
+  sudo apt install open-cobol
   # general purpose libraries
   sudo apt install zlib1g cmake gzip bzip2 unzip gcc dos2unix
   # multi-thread calculations

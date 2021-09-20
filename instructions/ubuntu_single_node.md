@@ -115,7 +115,8 @@ UpTime=0-00:28:47
 
 5.2 Write it from scratch
 
-  Use the following template, edit as you need and place it at `/etc/slurm-llnl/slurm.conf`
+  Use the following template, edit as you need and place it at `/etc/slurm-llnl/slurm.conf`.
+  For Ubuntu 21.04 with Slurm 20.11.4 it is `/etc/slurm/slurm.conf`
 
   ```
   SlurmctldHost=<put_name_of_your_node_here>
@@ -179,6 +180,5 @@ time srun -n$(nproc) sleep 1
 
 if everything is fine:
 ```
-sudo systemctl enable slurmd
-sudo systemctl enable slurmctld
+sudo systemctl enable slurmd slurmctld
 ```

@@ -23,6 +23,8 @@ Make sure, you have a computer which is computational enough to run software you
 
   ```
   sudo apt update && sudo apt full-upgrade -y
+  # general purpose libraries /utilities
+  sudo apt install zlib1g cmake gzip bzip2 unzip gcc dos2unix curl build-essential -y
   # installing Python 3
   sudo apt install python3 python3-pip python3-venv -y
   pip install setuptools wheel
@@ -30,10 +32,12 @@ Make sure, you have a computer which is computational enough to run software you
   # go to https://www.anaconda.com/products/individual to check the latest release and get its link
   wget https://repo.anaconda.com/archive/Anaconda3-2021.05-Linux-x86_64.sh
   bash Anaconda3*.sh
-  # confirm the conda init part, but disable the auto-launch of conda
+  # set hooks
+  /home/username/anaconda3/bin/conda shell.bash hook
+  /home/username/anaconda3/bin/conda init
   conda config --set auto_activate_base false
   # installing R with dependencies
-  sudo apt install dirmngr gnupg apt-transport-https ca-certificates software-properties-common build-essential -y
+  sudo apt install dirmngr gnupg apt-transport-https ca-certificates software-properties-common -y
   sudo apt install r-base-dev
   # Installing RUST
   curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
@@ -58,14 +62,11 @@ Make sure, you have a computer which is computational enough to run software you
   sudo apt install open-cobol
   # Installing Delphi / Object Pascal / Lazarus
   sudo apt install lazarus
-  # general purpose libraries
-  sudo apt install zlib1g cmake gzip bzip2 unzip gcc dos2unix -y
   # multi-thread calculations
   sudo apt install mpich
   pip install mpi4py h5py
   # media processing
-  sudo apt install ffmpeg opus-tools
-  sudo apt install ubuntu-restricted-extras build-essential
+  sudo apt install ffmpeg opus-tools ubuntu-restricted-extras
   # network shared utilities
   sudo apt install samba ntfs-3g nfs-common nfs-kernel-server netatalk
   ```
@@ -107,7 +108,7 @@ Make sure, you have a computer which is computational enough to run software you
   ```
   The output should be alike
   ```
-  NodeName=station CPUs=4 Boards=1 SocketsPerBoard=1 CoresPerSocket=4 ThreadsPerCore=1 RealMemory=15903
+  NodeName=station CPUs=4 Boards=1 SocketsPerBoard=1 CoresPerSocket=4 ThreadsPerCore=1 RealMemory=15894
   UpTime=0-00:28:47
   ```
   Discard part with `UpTime...` and reduce the `RealMemory` parameter by at least 0.5 GB (approximately), prepare that part as:

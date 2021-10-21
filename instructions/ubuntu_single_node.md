@@ -1,10 +1,10 @@
 # Ubuntu Desktop as Single Node Variation
 
 In this "tutorial" I consider the 64-bit Ubuntu:
-- latest revision (currently Ubuntu 21.04)
-- latest LTS (currently Ubuntu 20.04.3 LTS)
+- latest version (currently Ubuntu 21.10)
+- latest LTS version (currently Ubuntu 20.04.3 LTS)
 
-If there are differences in set-up, I'll mention it!
+If there are differences in set-up, those will be mentioned!
 
 ## Before we start
 Make sure, you have a computer which is computational enough to run software you need. I also prefer to have PC with 2 disk:
@@ -13,13 +13,24 @@ Make sure, you have a computer which is computational enough to run software you
 
 ## Instructions
 
-1. Install OS
+1. Prepare the installation media
+
+  Download the OS image and prepare the bootable media.
+  For Ubuntu, download links are located at https://ubuntu.com/#download
+
+  I use [Rufus](https://rufus.ie/en/) to flash the ISO of OS to USB drive with following settings:
+  - Partition scheme: `GTP`
+  - Target system: `UEFI (non CMS)`
+  - File system: `FAT32 (Default)`
+
+
+2. Install OS
   - install it to the high-speed SSD
   - select auto-mounting of HDD as `/storage`
 
-2. Install needed software
+3. Install needed software
 
-  2.1. General purpose tools and programming languages interpreters / compilers
+  3.1. General purpose tools and programming languages interpreters / compilers
 
   ```
   sudo apt update && sudo apt full-upgrade -y
@@ -69,18 +80,40 @@ Make sure, you have a computer which is computational enough to run software you
   sudo apt install ffmpeg opus-tools ubuntu-restricted-extras
   # network shared utilities
   sudo apt install samba ntfs-3g nfs-common nfs-kernel-server netatalk
+  # Installing HUGO static site generator
+  sudo apt install hugo
   ```
 
-3. Install SLURM / Munge
+  If need to install some fonts / spell checkers:
+
+  ```
+  sudo apt install ttf-mscorefonts-installer
+  sudo fc-cache -f -v
+  sudo install hunspell myspell hyphen
+  # if need extra languages, consider running:
+  # sudo install hunspell-{**,**}
+  # sudo install hyphen-{**,**}
+  # where {**,**} is 2-letter list of needed languages according to ISO 639-1
+  # for example, to add Ukrainian and Duthc languages support:
+  sudo install hunspell-{ua,nl}
+  sudo install hyphen-{ua,nl}
+  ```
+
+  I encountered errors with `libdvd` package stated as `libdvd-pkg: apt-get check failed, you may have broken packages. Aborting...`. Issue was resolved by executing:
+  ```
+  sudo dpkg-reconfigure libdvd-pkg
+  ```
+
+4. Install SLURM / Munge
 
   Install packages from repositories
   ```
   sudo apt install munge libmunge-dev slurm-wlm slurm-wlm-doc -y
   ```
 
-4. Edit Slurm / Munge settings
+5. Edit Slurm / Munge settings
 
-  4.1. Generate `munge` encryption keys:
+  5.1. Generate `munge` encryption keys:
   ```
   sudo /usr/sbin/mungekey
   sudo chown munge /etc/munge/munge.key
@@ -102,7 +135,7 @@ Make sure, you have a computer which is computational enough to run software you
   sudo systemctl enable munge
   ```
 
-  4.2 Collect the information of computer itself:
+  5.2 Collect the information of computer itself:
   ```
   slurmd -C
   ```
@@ -117,12 +150,12 @@ Make sure, you have a computer which is computational enough to run software you
   NodeName=station CPUs=4 Boards=1 SocketsPerBoard=1 CoresPerSocket=4 ThreadsPerCore=1 RealMemory=15000
   ```
 
-  4.3 Create SLURM config file
+  5.3 Create SLURM config file
   The location **DIFFERS** across distributions:
   - `/etc/slurm-llnl/slurm.conf` : Ubuntu 20.04 LTS and SLURM 20xxx
   - `/etc/slurm/slurm.conf` : Ubuntu 21.04 + SLURM 20.11.4
 
-  4.3.a Built-in editor on local machine or web-configurator
+  5.3.a Built-in editor on local machine or web-configurator
 
   From desktop environment open file `/usr/share/doc/slurm-wlm/html/configurator.html` with any web browser and:
   - Fix your hostname in `SlurmctldHost` and `NodeName`
@@ -148,7 +181,7 @@ Make sure, you have a computer which is computational enough to run software you
   PartitionName=debug Nodes=station Default=YES MaxTime=INFINITE State=UP Shared=EXCLUSIVE
   ```
 
-  4.3.b Write it from scratch [I prefer this option!]
+  5.3.b Write it from scratch [I prefer this option!]
 
   Use the following template:
 

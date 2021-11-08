@@ -143,7 +143,17 @@ yay -S slurm-llnl munge
 slurmd -C
 ```
 
+Output should be alike:
+```
+NodeName=target CPUs=4 Boards=1 SocketsPerBoard=1 CoresPerSocket=4 ThreadsPerCore=1 RealMemory=11862
+UpTime=0-00:42:42
+```
 
+Discard part with `UpTime...` and reduce the `RealMemory` parameter by at least 0.5 GB (approximately), prepare that part as:
+
+```
+NodeName=target CPUs=4 Boards=1 SocketsPerBoard=1 CoresPerSocket=4 ThreadsPerCore=1 RealMemory=10000
+```
 
 
 ## Secondary stuff, if `target` is used multipurpose

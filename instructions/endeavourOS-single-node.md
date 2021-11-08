@@ -139,6 +139,11 @@ Keys:
 ```
 # Currently, installs SLURM 21.08.3.1-1 + MUNGE 0.5.14-2
 yay -S slurm-llnl munge
+# Generate the encrytption keys for `munge`
+sudo rm -f /etc/munge/munge.key
+sudo /usr/sbin/mungekey
+sudo chown munge /etc/munge/munge.key
+sudo systemctl enable --now munge
 # get and keep the properties of running machine
 slurmd -C
 ```
@@ -155,7 +160,43 @@ Discard part with `UpTime...` and reduce the `RealMemory` parameter by at least 
 NodeName=target CPUs=4 Boards=1 SocketsPerBoard=1 CoresPerSocket=4 ThreadsPerCore=1 RealMemory=10000
 ```
 
+Copy existing example config file:
+```
+sudo cp /etc/slurm-llnl/slurm.conf.example /etc/slurm-llnl/slurm.conf
+```
 
+Edit `/etc/slurm-llnl/slurm.conf` file for following parameters:
+- `SlurmctldHost` should be the name of machine
+- `ProctrackType` should be `proctrack/linuxproc`
+- `ReturnToService` should be `2`
+
+And add in the end:
+```
+NodeName=target CPUs=4 Boards=1 SocketsPerBoard=1 CoresPerSocket=4 ThreadsPerCore=1 RealMemory=10000
+PartitionName=superbrain Nodes=target Default=YES MaxTime=INFINITE State=UP Shared=EXCLUSIVE
+```
+
+Now, fixing the folders and permissions:
+```
+# Creating and owning folders from SlurmdSpoolDir and StateSaveLocation
+sudo mkdir -p /var/spool/slurmd /var/spool/slurmctld
+sudo chown slurm: /var/spool/slurmd /var/spool/slurmctld
+
+# Creating and owning files from SlurmctldPidFile and SlurmdPidFile
+sudo touch /var/run/slurmctld.pid /var/run/slurmd.pid
+sudo chown slurm: /var/run/slurmctld.pid /var/run/slurmd.pid
+
+# Owning the  config file itself
+sudo chown slurm: /etc/slurm-llnl/slurm.conf
+```
+
+Test if it works:
+```
+sudo systemctl start slurmd slurmctld
+srun -n$(nproc) echo "Hello!"
+# if everything is fine:
+sudo systemctl enable --now slurmd slurmctld
+```
 ## Secondary stuff, if `target` is used multipurpose
 
 Bluetooth support ([instructions](https://discovery.endeavouros.com/bluetooth/bluetooth/2021/03/)):

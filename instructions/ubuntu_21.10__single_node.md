@@ -1,6 +1,6 @@
 # Ubuntu 21.10 Single-node
 
-Tested on Ubuntu 21.10 beta x64
+Tested on Ubuntu 21.10 x64
 
 
 ## 1. Install the OS

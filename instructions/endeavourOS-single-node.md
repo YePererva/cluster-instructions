@@ -82,13 +82,17 @@ sudo -i
 # update everything
 pacman -Syu
 # archiving and building
-pacman -S base-devel haskell-zlib zlib gzip bzip2 unzip git cmake dos2unix
+pacman -S base-devel haskell-zlib zlib gzip bzip2 unzip cmake dos2unix
+# network
+pacman -S rpcbind git
 # disk utilities
-pacman -S ntfs-3g hdf5
+pacman -S ntfs-3g hdf5 samba nfs-utils afpfs-ng
 # GCC, Fortran compilers
 pacman -S gcc gcc-libs gcc-d gcc-fortran
 # Java JDK
 pacman -S jdk-openjdk
+# Python additions
+pacman -S python-setuptools python-pip python-wheel python-tensorflow python-matplotlib python-h5py
 # Golang
 pacman -S go
 # Perl
@@ -101,13 +105,15 @@ pacman -S gnucobol
 pacman -S lazarus lazarus-qt5
 # Haskell
 pacman -S ghc
+# LaTeX
+pacman -S texlive-core texlive-latexextra
 
 # R-studio
 yay -S rstudio-desktop
 
 # MPICH
 yay -S mpich
-pacman -S python-mpi4py python-h5py python-matplotlib python-tensorflow
+pacman -S python-mpi4py python-matplotlib python-tensorflow
 
 # RUST
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh

@@ -108,6 +108,9 @@ yay -S rstudio-desktop
 # MPICH
 yay -S mpich
 pacman -S python-mpi4py python-h5py python-matplotlib python-tensorflow
+
+# RUST
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 ```
 
 ## 04. Mounting additional disks
@@ -136,7 +139,11 @@ Keys:
 ```
 # Currently, installs SLURM 21.08.3.1-1 + MUNGE 0.5.14-2
 yay -S slurm-llnl munge
+# get and keep the properties of running machine
+slurmd -C
 ```
+
+
 
 
 ## Secondary stuff, if `target` is used multipurpose

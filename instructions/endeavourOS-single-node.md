@@ -249,3 +249,8 @@ sudo pacman -S kicad
 # development version
 yay -S kicad-git
 ```
+
+Steam:
+```
+sudo pacman -S steam
+```

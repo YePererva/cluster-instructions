@@ -86,7 +86,7 @@ pacman -S base-devel haskell-zlib zlib gzip bzip2 unzip cmake dos2unix
 # network
 pacman -S rpcbind git
 # disk utilities
-pacman -S ntfs-3g hdf5 samba nfs-utils afpfs-ng
+pacman -S ntfs-3g hdf5 samba nfs-utils afpfs-ng gvfs-smb
 # GCC, Fortran compilers
 pacman -S gcc gcc-libs gcc-d gcc-fortran
 # Java JDK
@@ -107,6 +107,10 @@ pacman -S lazarus lazarus-qt5
 pacman -S ghc
 # LaTeX
 pacman -S texlive-core texlive-latexextra
+# C#
+pacman -S dotnet-runtime dotnet-sdk
+# If needed PowerShell in Linux from .NET
+dotnet tool install --global PowerShell
 
 # R-studio
 yay -S rstudio-desktop
@@ -125,7 +129,7 @@ Here, I assume having the second HDD in the PC. Endeavour OS by default wouldn't
 
 
 ```
-sudo mkdit /mnt/storage
+sudo mkdir /mnt/storage
 sudo chown nobody: -R /mnt/storage
 sudo mount /dev/sdb1 /mnt/storage
 ```
@@ -149,6 +153,9 @@ yay -S slurm-llnl munge
 sudo rm -f /etc/munge/munge.key
 sudo /usr/sbin/mungekey
 sudo chown munge /etc/munge/munge.key
+# check if munge working
+munge -n | unmunge
+# if everythign is OK, add to auto-start
 sudo systemctl enable --now munge
 # get and keep the properties of running machine
 slurmd -C
@@ -156,14 +163,14 @@ slurmd -C
 
 Output should be alike:
 ```
-NodeName=target CPUs=4 Boards=1 SocketsPerBoard=1 CoresPerSocket=4 ThreadsPerCore=1 RealMemory=11862
+NodeName=target CPUs=8 Boards=1 SocketsPerBoard=1 CoresPerSocket=4 ThreadsPerCore=2 RealMemory=15933
 UpTime=0-00:42:42
 ```
 
 Discard part with `UpTime...` and reduce the `RealMemory` parameter by at least 0.5 GB (approximately), prepare that part as:
 
 ```
-NodeName=target CPUs=4 Boards=1 SocketsPerBoard=1 CoresPerSocket=4 ThreadsPerCore=1 RealMemory=10000
+NodeName=target CPUs=8 Boards=1 SocketsPerBoard=1 CoresPerSocket=4 ThreadsPerCore=2 RealMemory=15000
 ```
 
 Copy existing example config file:
@@ -178,7 +185,7 @@ Edit `/etc/slurm-llnl/slurm.conf` file for following parameters:
 
 And add in the end:
 ```
-NodeName=target CPUs=4 Boards=1 SocketsPerBoard=1 CoresPerSocket=4 ThreadsPerCore=1 RealMemory=10000
+NodeName=target CPUs=8 Boards=1 SocketsPerBoard=1 CoresPerSocket=4 ThreadsPerCore=2 RealMemory=15000 State=UNKNOWN
 PartitionName=superbrain Nodes=target Default=YES MaxTime=INFINITE State=UP Shared=EXCLUSIVE
 ```
 
@@ -230,6 +237,9 @@ sudo pacman -Syu ffmpeg youtube-dl
 sudo pacman -Syu vlc
 
 yay -S aacskeys
+
+sudo wget https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp -O /usr/local/bin/yt-dlp
+sudo chmod a+rx /usr/local/bin/yt-dlp
 ```
 
 Kicad:

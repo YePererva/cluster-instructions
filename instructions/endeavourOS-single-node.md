@@ -49,7 +49,7 @@ Host target_host_name
     User target_username
 ```
 
-Now, the target should be available just by running `ssh target_host_name` from the `host`.
+Now, the target should be available just by running `ssh target_host_name` from the `host` terminal.
 
 ### Preventing sleeping
 
@@ -125,24 +125,73 @@ curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 
 ## 04. Mounting additional disks
 
-Here, I assume having the second HDD in the PC. Endeavour OS by default wouldn't mount it not make accessible.
+Here is assumed having the second HDD in the PC as `/dev/sdb`. Endeavour OS by default wouldn't mount it.
+Needed to:
+- remove all existing partition on disk
+- create the new partition
+- format the partition, either `ext4` ot `ntfs`:
+  - `ext4`:
+  - `ntfs`:
+- make it automatically mounted at system start-up
 
+### Preparing the disk partition
 
 ```
+sudo fdisk /dev/sdb
+```
+Now, the terminal will switch to `fdisk` interface:
+- Type `d` to proceed to delete a partition
+- Type `1` to select the 1st partition and press `Enter`. \
+  If disk contains only one partition it will be deleted instantly at `d`
+- Repeat deletion for other partitions on disk
+- Type `n` to create a new partition
+- Type `p` to indicate a primary partition
+- Press `ENTER` to accept the default partition number
+- Press `ENTER` to accept the default starting sector
+- Press `ENTER` to accept the default ending sector
+  - There could be message:
+  ```
+  Partition #1 contains a *** signature.
+
+  Do you want to remove the signature? [Y]es/[N]o:
+  ```
+  Confirm deletion and proceed
+- Type `p` again to print a list of partitions
+- If everything is correct, `w` to write the change
+
+This will create a partition `/dev/sdb1`
+- for `ext4` : `sudo mkfs.ext4 /dev/sdb1`
+- for `ntfs` : `sudo mkfs.ntfs /dev/sdb1`
+- for `FAT32` : `sudo mkfs.vfat /dev/sdb1` \
+  NB! : Don't use this. Not suitable for files > 4 GB
+
+### Mounting disk
+```
+# create a folder to mount disk
 sudo mkdir /mnt/storage
+# adjust the permissions and ownership
 sudo chown nobody: -R /mnt/storage
 sudo mount /dev/sdb1 /mnt/storage
+# if mounts successfully, unmount it
+sudo umount /dev/sdb1
 ```
 
-edit `/etc/fstab` and add:
+Now, configure automatic mounting by editing `/etc/fstab` and adding to it:
 ```
 /dev/sdb1 /mnt/storage  ext4  exec,nofail  0 0
 ```
-
 Keys:
 - `exec` : to allow running executables from it
 - `nofail` : keep booting system if mounting fails
 
+NB!: if you need `NTFS` file system, specify `ntfs` instead of `ext4`. Some  other operating system ask to specify `NTFS` as `ntfs-3g`
+
+Check the mounting by running:
+```
+sudo mount -a
+```
+
+If no problem occured, the system will automatically mount folder at start-up.
 
 ## 05. SLURM and MUNGE
 
@@ -210,7 +259,7 @@ srun -n$(nproc) echo "Hello!"
 # if everything is fine:
 sudo systemctl enable --now slurmd slurmctld
 ```
-## Secondary stuff, if `target` is used multipurpose
+## -01. Secondary stuff, if `target` is used multipurpose
 
 Bluetooth support ([instructions](https://discovery.endeavouros.com/bluetooth/bluetooth/2021/03/)):
 ```
@@ -234,6 +283,9 @@ Media playback:
 ```
 sudo pacman -Syu libdvdcss opus opus-tools libdvdread libaacs libbluray v4l2loopback-dkms
 sudo pacman -Syu ffmpeg youtube-dl
+
+# Replace the default Totem player with VLC
+sudo pacman -R totem
 sudo pacman -Syu vlc
 
 yay -S aacskeys

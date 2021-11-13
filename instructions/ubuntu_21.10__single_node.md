@@ -73,6 +73,8 @@ sudo apt install lazarus
 sudo apt install mpich
 # media processing
 sudo apt install ffmpeg opus-tools libdvdcss2 libdvd-pkg ubuntu-restricted-extras vlc libaacs0 libbluray-bdj libbluray2 v4l2loopback-dkms
+# Gdebi 
+sudo apt install gdebi
 
 ```
 

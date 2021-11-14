@@ -292,6 +292,10 @@ yay -S aacskeys
 
 sudo wget https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp -O /usr/local/bin/yt-dlp
 sudo chmod a+rx /usr/local/bin/yt-dlp
+
+# alternatively, if pacman -S youtube-dl didn't work:
+sudo wget https://yt-dl.org/downloads/latest/youtube-dl -O /usr/local/bin/youtube-dl
+sudo chmod a+rx /usr/local/bin/youtube-dl
 ```
 
 Kicad:
@@ -305,4 +309,25 @@ yay -S kicad-git
 Steam:
 ```
 sudo pacman -S steam
+```
+
+## configuring of youtube-dl
+
+Edit or create file `/etc/youtube-dl.conf`:
+
+```
+# always merge to mkv
+--merge-output-format mkv
+
+# Number of retries for a fragment
+--fragment-retries 500
+
+# Abort download of video if there is unavailable fragment
+--abort-on-unavailable-fragment
+
+# ignore errors
+--ignore-errors
+
+# downloaded formats
+--format bestvideo+bestaudio
 ```

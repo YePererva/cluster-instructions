@@ -311,6 +311,25 @@ Steam:
 sudo pacman -S steam
 ```
 
+Microcontrollers programming:
+```
+# General purpose pre-requisites
+sudo pacman -S dfu-util libusb
+
+# ATMEL microcontrollers
+sudo pacman -S avrdude avr-gcc
+# For Arduino IDE
+sudo pacman -S arduino arduino-docs
+
+# STMicroelectronics
+sudo pacman -S stlink openocd
+
+# Some bare metal compilers
+sudo pacman -S arm-none-eabi-gcc arm-none-eabi-gdb arm-none-eabi-binutils arm-none-eabi-newlib
+
+```
+
+
 ## configuring of youtube-dl
 
 Edit or create file `/etc/youtube-dl.conf`:

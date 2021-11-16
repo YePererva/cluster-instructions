@@ -339,7 +339,7 @@ yay -S hid-flash
 
 ## configuring of youtube-dl
 
-Edit or create file `/etc/youtube-dl.conf`:
+Edit or create file `/etc/youtube-dl.conf` or `/etc/yt-dlp.conf`:
 
 ```
 # always merge to mkv
@@ -347,6 +347,7 @@ Edit or create file `/etc/youtube-dl.conf`:
 
 # Number of retries for a fragment
 --fragment-retries 500
+--retries 500
 
 # Abort download of video if there is unavailable fragment
 --abort-on-unavailable-fragment
@@ -380,4 +381,12 @@ edit the /etc/samba/smb.conf for public folder:
    writable = yes
    browseable = yes
    printable = no
+```
+
+
+## If drained for unknown reason
+
+```
+sudo scontrol update nodename=target state=DOWN Reason="undraining"
+sudo scontrol update nodename=target state=UNDRAIN
 ```

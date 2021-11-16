@@ -317,15 +317,22 @@ Microcontrollers programming:
 sudo pacman -S dfu-util libusb
 
 # ATMEL microcontrollers
-sudo pacman -S avrdude avr-gcc
-# For Arduino IDE
-sudo pacman -S arduino arduino-docs
+sudo pacman -S avrdude avr-{gcc,binutils,libc}
+yay -S avra
 
 # STMicroelectronics
-sudo pacman -S stlink openocd
+sudo pacman -S stlink openocd gdb
+# STM32CubeIDE
+yay -S stm32cubeide stm32cubemx sw4stm32
 
 # Some bare metal compilers
 sudo pacman -S arm-none-eabi-gcc arm-none-eabi-gdb arm-none-eabi-binutils arm-none-eabi-newlib
+
+
+# For Arduino IDE
+sudo pacman -S arduino arduino-docs hid-flash
+# For STM32F10x with arduino bootloader
+yay -S hid-flash
 
 ```
 
@@ -349,4 +356,28 @@ Edit or create file `/etc/youtube-dl.conf`:
 
 # downloaded formats
 --format bestvideo+bestaudio
+```
+
+## Setting-up samba for windows access
+
+```
+sudo wget -O /etc/samba/smb.conf https://git.samba.org/samba.git/?p=samba.git;a=blob_plain;f=examples/smb.conf.default;hb=HEAD
+sudo chown -R root:root /etc/samba/smb.conf
+```
+
+edit the /etc/samba/smb.conf for public folder:
+```
+# A publicly accessible directory, read/write to all users. Note that all files
+# created in the directory by users will be owned by the default user, so
+# any user with access can delete any other user's files. Obviously this
+# directory must be writable by the default user. Another user could of course
+# be specified, in which case all files would be owned by that user instead.
+[public]
+   comment = Station Storage
+   path = /mnt/storage
+   public = yes
+   only guest = yes
+   writable = yes
+   browseable = yes
+   printable = no
 ```

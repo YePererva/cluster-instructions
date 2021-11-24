@@ -288,7 +288,7 @@ sudo pacman -Syu ffmpeg youtube-dl
 sudo pacman -R totem
 sudo pacman -Syu vlc
 
-yay -S aacskeys
+yay -S aacskeys libxc
 
 sudo wget https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp -O /usr/local/bin/yt-dlp
 sudo chmod a+rx /usr/local/bin/yt-dlp
@@ -301,9 +301,11 @@ sudo chmod a+rx /usr/local/bin/youtube-dl
 Kicad:
 ```
 # stable kicad
-sudo pacman -S kicad
+sudo pacman -S kicad kicad-library kicad-library-3d
+# some additional tools
+sudo pacman -S pcbdraw python-kikit
 # development version
-yay -S kicad-git
+yay -S kicad-git kicad-library-nightly
 ```
 
 Steam:

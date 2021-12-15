@@ -392,3 +392,11 @@ edit the /etc/samba/smb.conf for public folder:
 sudo scontrol update nodename=target state=DOWN Reason="undraining"
 sudo scontrol update nodename=target state=UNDRAIN
 ```
+
+
+## If needed chromium instead of firefox
+```
+sudo pacman -Syu chromium
+yay -S chromium-widevine
+sudo pacman -R firefox
+```

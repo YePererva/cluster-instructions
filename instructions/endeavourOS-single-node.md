@@ -163,7 +163,7 @@ This will create a partition `/dev/sdb1`
 - for `ext4` : `sudo mkfs.ext4 /dev/sdb1`
 - for `ntfs` : `sudo mkfs.ntfs /dev/sdb1`
 - for `FAT32` : `sudo mkfs.vfat /dev/sdb1` \
-  NB! : Don't use this. Not suitable for files > 4 GB
+  NB! : Don't use `FAT32`. It is not suitable for files > 4 GB
 
 ### Mounting disk
 ```
@@ -288,7 +288,9 @@ sudo pacman -Syu ffmpeg youtube-dl
 sudo pacman -R totem
 sudo pacman -Syu vlc
 
-yay -S aacskeys libxc
+yay -S aacskeys libxc libbdplus
+mkdir ~/.config/aacs/
+cd ~/.config/aacs/ && wget http://vlc-bluray.whoknowsmy.name/files/KEYDB.cfg
 
 sudo wget https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp -O /usr/local/bin/yt-dlp
 sudo chmod a+rx /usr/local/bin/yt-dlp
@@ -333,7 +335,7 @@ sudo pacman -S arm-none-eabi-gcc arm-none-eabi-gdb arm-none-eabi-binutils arm-no
 
 # For Arduino IDE
 sudo pacman -S arduino arduino-docs hid-flash
-# For STM32F10x with arduino bootloader
+# For STM32F10x with Arduino bootloader
 yay -S hid-flash
 
 ```

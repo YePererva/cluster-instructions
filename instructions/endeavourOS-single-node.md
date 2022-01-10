@@ -47,6 +47,7 @@ If your username on the `target` is different from `host` username or you just d
 Host target_host_name
     HostName target_ip
     User target_username
+    Port port
 ```
 
 Now, the target should be available just by running `ssh target_host_name` from the `host` terminal.
@@ -401,4 +402,10 @@ sudo scontrol update nodename=target state=UNDRAIN
 sudo pacman -Syu chromium
 yay -S chromium-widevine
 sudo pacman -R firefox
+```
+
+## If needed GUI python development
+```
+pip install pyqt6
+pip install pyqt-tools
 ```

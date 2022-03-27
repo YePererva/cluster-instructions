@@ -31,7 +31,7 @@ sudo apt update && sudo apt full-upgrade -y && sudo autoremove -y
 # general purpose libraries /utilities
 sudo apt install zlib1g cmake gzip bzip2 unzip gcc dos2unix curl build-essential -y
 # network shared utilities
-sudo apt install samba ntfs-3g nfs-common nfs-kernel-server netatalk
+sudo apt install samba ntfs-3g nfs-common nfs-kernel-server netatalk -y
 # installing Python 3
 sudo apt install python3 python3-pip python3-venv -y
 pip install setuptools wheel
@@ -73,7 +73,7 @@ sudo apt install lazarus
 sudo apt install mpich
 # media processing
 sudo apt install ffmpeg opus-tools libdvdcss2 libdvd-pkg ubuntu-restricted-extras vlc libaacs0 libbluray-bdj libbluray2 v4l2loopback-dkms
-# Gdebi 
+# Gdebi
 sudo apt install gdebi
 
 ```
@@ -300,3 +300,17 @@ Wants=network-online.target
 when calling `sudo systemctl edit slurmd` and `sudo systemctl edit slurmctld`
 
 ## 5. Install all required software
+
+
+## 6. additional features
+
+Media
+
+Internet:
+
+
+Installing yt-dlp:
+```
+sudo curl -L https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp -o /usr/local/bin/yt-dlp
+sudo chmod a+rx /usr/local/bin/yt-dlp
+```

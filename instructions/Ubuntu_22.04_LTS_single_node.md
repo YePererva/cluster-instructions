@@ -22,6 +22,8 @@ Tested desktop version. For server version might be additional hassle with firew
 ## 2. Prepare for and configure remote access via ssh
 Install ssh:
 ```
+# sudo apt install ssh
+# sudo systemctl enable --now ssh
 sudo apt install openssh-server
 sudo systemctl enable --now ssh
 ```

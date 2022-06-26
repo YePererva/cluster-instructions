@@ -354,8 +354,8 @@ Edit or create file `/etc/yt-dlp.conf`:
 --merge-output-format mkv
 
 # Number of retries for a fragment
---fragment-retries 500
---retries 500
+--fragment-retries 1000
+--retries 1000
 
 # Abort download of video if there is unavailable fragment to avoid glitches in
 # merged video

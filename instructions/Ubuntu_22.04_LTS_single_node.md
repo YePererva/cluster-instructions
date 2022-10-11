@@ -367,6 +367,10 @@ Edit or create file `/etc/yt-dlp.conf`:
 # downloaded formats
 --format bestvideo+bestaudio
 
+# remove special characters from filenames
+# this works with yt-dlp only, not youtube-dl
+--compat-options filename-sanitization
+
 # Uncomment the next line to reencode into h265
 # --postprocessor-args "-c:v libx265 -preset veryslow -crf 15 -c:a opus -strict experimental -b:a 128k"
 # Use only if system supports hardware re-encoding
